@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.quibbly.videolist.VideoListState
 import com.quibbly.videolist.domain.Video
 import com.quibbly.videolist.ui.video.VideoPlayer
 import com.quibbly.videolist.ui.video.VideoPlayerScreen
@@ -26,7 +27,7 @@ import kotlin.time.ExperimentalTime
 fun VideoListScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    videos: List<Video>,
+    videoState: VideoListState,
 ) {
     var selectedVideo by remember { mutableStateOf<Video?>(null) }
 
@@ -49,7 +50,7 @@ fun VideoListScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                videos.forEach { video ->
+                videoState.videos.forEach { video ->
                     item(key = video.title) {
                         VideoItem(
                             video = video,
