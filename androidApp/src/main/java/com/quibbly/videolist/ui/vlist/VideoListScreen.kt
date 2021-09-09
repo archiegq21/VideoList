@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,9 +17,10 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.quibbly.videolist.domain.Video
+import com.quibbly.videolist.ui.video.VideoPlayer
+import com.quibbly.videolist.ui.video.VideoPlayerScreen
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
-import kotlin.time.hours
 
 @Composable
 fun VideoListScreen(
@@ -27,8 +28,10 @@ fun VideoListScreen(
     modifier: Modifier = Modifier,
     videos: List<Video>,
 ) {
-    Box(
+    var selectedVideo by remember { mutableStateOf<Video?>(null) }
 
+    Box(
+        modifier = Modifier.fillMaxSize(),
     ) {
         Scaffold(
             modifier = modifier,
@@ -51,13 +54,18 @@ fun VideoListScreen(
                         VideoItem(
                             video = video,
                             onClick = {
-
+                                selectedVideo = video
                             }
                         )
                     }
                 }
             }
         }
+        VideoPlayerScreen(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            video = selectedVideo,
+            onDismiss = { selectedVideo = null }
+        )
     }
 }
 

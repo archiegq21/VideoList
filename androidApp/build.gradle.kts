@@ -85,6 +85,9 @@ dependencies {
     androidTestImplementation(Libs.Jetpack.Compose.ui_test)
     androidTestImplementation(Libs.Jetpack.Compose.ui_test_junit)
 
+    // ExoPlayer
+    implementation("com.google.android.exoplayer:exoplayer:2.15.0")
+
     // Koin
     implementation(Libs.Koin.android)
 
