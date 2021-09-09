@@ -42,6 +42,7 @@ object Libs {
             const val lifecycler_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
             const val coil = "io.coil-kt:coil-compose:1.3.2"
             const val insets = "com.google.accompanist:accompanist-insets:$coil_version"
+            const val swipe_refresh = "com.google.accompanist:accompanist-swiperefresh:$coil_version"
         }
     }
 

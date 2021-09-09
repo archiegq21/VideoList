@@ -27,6 +27,7 @@ fun NavGraph(
                 modifier = modifier,
                 navController = navController,
                 videoState = videoState,
+                onRefresh = mainViewModel::fetchVideos
             )
         }
     }

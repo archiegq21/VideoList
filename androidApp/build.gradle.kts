@@ -80,6 +80,7 @@ dependencies {
     // Compose Coil
     implementation(Libs.Jetpack.Compose.coil)
     implementation(Libs.Jetpack.Compose.insets)
+    implementation(Libs.Jetpack.Compose.swipe_refresh)
 
     // Compose Testing
     androidTestImplementation(Libs.Jetpack.Compose.ui_test)

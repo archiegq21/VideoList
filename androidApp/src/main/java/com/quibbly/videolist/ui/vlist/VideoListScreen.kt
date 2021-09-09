@@ -1,6 +1,5 @@
 package com.quibbly.videolist.ui.vlist
 
-import android.provider.MediaStore
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,9 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.quibbly.videolist.VideoListState
 import com.quibbly.videolist.domain.Video
-import com.quibbly.videolist.ui.video.VideoPlayer
 import com.quibbly.videolist.ui.video.VideoPlayerScreen
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -28,6 +28,7 @@ fun VideoListScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     videoState: VideoListState,
+    onRefresh: () -> Unit,
 ) {
     var selectedVideo by remember { mutableStateOf<Video?>(null) }
 
@@ -44,20 +45,25 @@ fun VideoListScreen(
                 )
             },
         ) { padding ->
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = padding,
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(videoState.loading),
+                onRefresh = onRefresh,
             ) {
-                videoState.videos.forEach { video ->
-                    item(key = video.title) {
-                        VideoItem(
-                            video = video,
-                            onClick = {
-                                selectedVideo = video
-                            }
-                        )
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = padding,
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    videoState.videos.forEach { video ->
+                        item(key = video.title) {
+                            VideoItem(
+                                video = video,
+                                onClick = {
+                                    selectedVideo = video
+                                }
+                            )
+                        }
                     }
                 }
             }

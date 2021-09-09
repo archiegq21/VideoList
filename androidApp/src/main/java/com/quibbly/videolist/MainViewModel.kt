@@ -19,7 +19,7 @@ class MainViewModel(
         fetchVideos()
     }
 
-    private fun fetchVideos() {
+    fun fetchVideos() {
         viewModelScope.launch {
             val result = remoteSource.fetchVideoList()
 
