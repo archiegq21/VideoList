@@ -1,29 +1,25 @@
 package com.quibbly.videolist.ui.video
 
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
-import com.google.accompanist.insets.LocalWindowInsets
 import com.quibbly.videolist.domain.Video
 
 private enum class VideoPlayerState {
     Collapsed,
     Expanded
 }
-
-private val VideoCollapsedHeight = 100.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -87,7 +83,6 @@ fun VideoPlayerScreen(
             VideoPlayer(
                 video = video,
                 modifier = Modifier
-                    .height(surfaceHeight)
                     .aspectRatio(16f / 9f)
                     .background(Color.Black),
             )
